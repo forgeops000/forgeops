@@ -27,7 +27,7 @@ services:
       - WORDPRESS_DB_HOST=db:3306
       - WORDPRESS_DB_USER=$MYSQL_USER
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_NAME=fops-wordpress
     volumes:
       - wordpress:/var/www/html
     networks:
@@ -47,3 +47,14 @@ services:
       - certbot-etc:/etc/letsencrypt
     networks:
       - app-network
+
+
+
+volumes:
+  certbot-etc:
+  wordpress:
+  dbdata:
+
+networks:
+  app-network:
+    driver: bridge
