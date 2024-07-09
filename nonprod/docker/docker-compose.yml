@@ -52,6 +52,7 @@ volumes:
   certbot-etc:
   wordpress:
   dbdata:
+  nginx-conf:
 
 networks:
   app-network:
