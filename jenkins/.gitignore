@@ -1,0 +1,9 @@
+jenkins_home/*
+
+# Only include specific configuration files
+!jenkins_home/jobs/
+!jenkins_home/config.xml
+
+# Exclude sensitive data
+jenkins_home/secrets/
+jenkins_home/credentials.xml
