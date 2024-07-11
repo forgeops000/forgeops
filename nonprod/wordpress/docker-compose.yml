@@ -20,7 +20,7 @@ services:
     depends_on:
       - db
     image: wordpress:6.4.2-fpm-alpine
-    container_name: wordpress
+    container_name: fops-wordpress
     restart: unless-stopped
     env_file: .env
     environment:
@@ -37,7 +37,7 @@ services:
     depends_on:
       - wordpress
     image: nginx:1.26.0-alpine
-    container_name: webserver
+    container_name: fops-webserver
     restart: unless-stopped
     ports:
       - "80:80"
@@ -47,8 +47,6 @@ services:
       - certbot-etc:/etc/letsencrypt
     networks:
       - app-network
-
-
 
 volumes:
   certbot-etc:
