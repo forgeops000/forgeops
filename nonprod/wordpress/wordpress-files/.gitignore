@@ -1,0 +1,16 @@
+# system files
+.DS_Store
+Thumbs.db
+
+# environment files
+wp-config.php
+
+# dynamic directory
+wp-content/uploads/
+wp-content/cache/
+
+# Dependencies Node.js
+node_modules/
+
+# Dependencies PHP
+vendor/
