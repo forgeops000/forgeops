@@ -1,2 +1,2 @@
 FROM wordpress:6.4.2-fpm-alpine
-COPY wordpress-files /var/www/html/
+COPY . /var/www/html/
