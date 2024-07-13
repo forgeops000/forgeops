@@ -1,0 +1,2 @@
+FROM wordpress:latest
+COPY wordpress-files /var/www/html/
