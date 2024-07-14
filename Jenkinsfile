@@ -2,14 +2,17 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_COMPOSE = '/usr/local/bin/docker compose'
+        DOCKER_COMPOSE = '/usr/bin/docker compose'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/forgeops000/forgeops.git'
-                git checkout jenkins-pipeline
+                script {
+                    // Clone repo and checkout the specific branch
+                    //git url: 'https://github.com/forgeops000/forgeops.git', branch: 'jenkins-pipeline'
+                    git 'https://github.com/forgeops000/forgeops.git'
+                }
             }
         }
         stage('Build Docker Images') {
@@ -23,14 +26,14 @@ pipeline {
             steps {
                 script {
                     sh "${DOCKER_COMPOSE} -f wordpress/docker-compose.yml up -d"
-                    // Tu możesz dodać kroki testowania, np. testy jednostkowe lub integracyjne
+                    // Test
                 }
             }
         }
         stage('Deploy') {
             steps {
                 script {
-                    // Kroki wdrażania, np. push do rejestru Docker lub wdrożenie na serwerze
+                    // Deploy
                     sh "${DOCKER_COMPOSE} -f wordpress/docker-compose.yml up -d"
                 }
             }
@@ -38,6 +41,7 @@ pipeline {
     }
     post {
         always {
+            //sh "${DOCKER_COMPOSE} -f wordpress/docker-compose.yml down"
             script {
                 sh "${DOCKER_COMPOSE} -f wordpress/docker-compose.yml up -d"
             }
