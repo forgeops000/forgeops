@@ -8,21 +8,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo/wordpress.git'
+                git 'https://github.com/forgeops000/forgeops.git'
                 git checkout jenkins-pipeline
             }
         }
         stage('Build Docker Images') {
             steps {
                 script {
-                    sh "${DOCKER_COMPOSE} build"
+                    sh "${DOCKER_COMPOSE} -f wordpress/docker-compose.yml build"
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
-                    sh "${DOCKER_COMPOSE} up -d"
+                    sh "${DOCKER_COMPOSE} -f wordpress/docker-compose.yml up -d"
                     // Tu możesz dodać kroki testowania, np. testy jednostkowe lub integracyjne
                 }
             }
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 script {
                     // Kroki wdrażania, np. push do rejestru Docker lub wdrożenie na serwerze
-                    sh "${DOCKER_COMPOSE} up -d"
+                    sh "${DOCKER_COMPOSE} -f wordpress/docker-compose.yml up -d"
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
     post {
         always {
             script {
-                sh "${DOCKER_COMPOSE} down"
+                sh "${DOCKER_COMPOSE} -f wordpress/docker-compose.yml up -d"
             }
         }
     }
